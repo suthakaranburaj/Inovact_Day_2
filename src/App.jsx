@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useContext } from "react";
+import { Box, Container, AppBar, Toolbar } from "@mui/material";
+import { ThemeContext } from "./context/ThemeContext";
+import { lightTheme, darkTheme } from "./theme";
+import ThemeToggle from "./context/ThemeToggle";
+import ScrollTop from "./components/ScrollTop";
+import Header from "./components/Header";
+import SectionStatistics from "./components/SectionStatistics";
+import SectionDopamine from "./components/SectionDopamine";
+import SectionAttention from "./components/SectionAttention";
+import SectionComparison from "./components/SectionComparison";
+import SectionHero from "./components/SectionHero";
+import SectionTestimonial from "./components/SectionTestimonial";
+import SectionTips from "./components/SectionTips";
+import Footer from "./components/Footer";
+// Import other components...
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { mode } = useContext(ThemeContext);
+  const theme = mode === "light" ? lightTheme : darkTheme;
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Box
+      sx={{
+        background: theme.palette.background.default,
+        minHeight: "100vh",
+        transition: "background 0.3s ease",
+      }}
+    >
+      <AppBar position="static" color="inherit">
+        {/* <Toolbar sx={{ justifyContent: "flex-end" }}> */}
+          {/* <ThemeToggle /> */}
+        {/* </Toolbar> */}
+      </AppBar>
+
+      <Container maxWidth="lg">
+        <div id="back-to-top-anchor" />
+        <Header />
+        <SectionStatistics />
+        <SectionDopamine />
+        <SectionAttention />
+        <SectionComparison />
+        <SectionTestimonial />
+        <SectionTips />
+        <Footer />
+      </Container>
+      <ScrollTop />
+    </Box>
+  );
 }
 
-export default App
+export default App;
